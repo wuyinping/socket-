@@ -1,0 +1,22 @@
+__author__ = 'wuyinping'
+#coding=utf-8
+from socket import *
+from time import ctime
+
+bufsize=1024
+host='127.0.0.1'
+port=8888
+address=(host,port)
+
+client_socket=socket(AF_INET,SOCK_STREAM)
+client_socket.connect(address)
+
+while True:
+    data=input("要发送的数据-->")
+    if not data:
+        break
+    else:
+        client_socket.send(data.encode())
+        data=client_socket.recv(bufsize)
+        print (' 收到---->%s\n%s' %(ctime(),data))
+client_socket.close()
